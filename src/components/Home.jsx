@@ -4,10 +4,10 @@ import { setUsername, selectUsername, setPhoneNumber, selectPhoneNumber, selectA
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Carousel from './Carousel';
-import axios from 'axios';
+import axios from 'axios'; 
 import { Container } from 'react-bootstrap';
 import Loader from '../ReusableComponents/Loader';
-
+ 
 
 const Home = () => {
 

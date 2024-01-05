@@ -7,7 +7,7 @@ import Carousel from './Carousel';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
 import Loader from '../ReusableComponents/Loader';
-
+ 
 
 const Home = () => {
 

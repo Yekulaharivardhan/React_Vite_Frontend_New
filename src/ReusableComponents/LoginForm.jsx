@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -8,16 +9,16 @@ import Row from 'react-bootstrap/Row';
 function LoginForm() {
   const [validated, setValidated] = useState(false);
 const [userDetails, setUserdetails] = useState({
-    first_name:"",
-    last_name:"",
-    user_name:"",
-    city:"",
-    state:"",
-    pin_code:""
+    first_name:"Harivardhan",
+    last_name:"yekula",
+    user_name:"harivardhan-yekula",
+    city:"hyderabad",
+    state:"Telangala",
+    pin_code:500050
 })
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit =async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -25,6 +26,19 @@ const [userDetails, setUserdetails] = useState({
     }
 
     setValidated(true);
+
+
+let respo = await axios.post("http://localhost:5001/registerNewUser",{
+  first_name:userDetails.first_name,
+  last_name:userDetails.last_name,
+  user_name:userDetails.user_name,
+  city:userDetails.city,
+  state:userDetails.state,
+  pin_code:userDetails.pin_code
+})
+
+console.log(respo,'respo')
+
   };
 
   return (

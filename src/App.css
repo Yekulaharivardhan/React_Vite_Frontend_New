@@ -12,6 +12,90 @@
   color: white;
 
 }
+ .navbar_info{
+  z-index: 1;
+ }
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--scroll-padding, 40px);
+}
+.info_main div{
+padding: 15px;
+max-width: 70rem;
+display: inline-block;
+text-decoration: none;
+color: black;
+margin-top: 3.5rem;
+}
+.nav_link_senction a{
+font-size: 15px;
+}
+.info_main{
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.bx-wrapper{
+   
+  position: relative;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    background-color: rgb(158, 158, 158);
+}
+.bx-viewport{
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px
+}
+.bxslider{
+  width: 10000%;
+  position: relative;
+  transition-duration: 0.5s;
+  transform: translate3d(0px, 0px, 0px);
+  margin: 0;
+  padding: 0;
+  -webkit-perspective: 1000;
+  list-style: none;
+  display: block;
+  transition: .3s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.bxslider .item{
+  white-space: normal;
+  float: left;
+  list-style: none;
+  position: relative;
+  width: 234.667px;
+  margin-right: 8px;
+}
+.bx-controls-direction{
+  display: flex;
+  justify-content: space-between;
+}
+.bx-controls-direction .bx-prev{
+left: -22px;
+}
+.bx-controls-direction .bx-next{
+right: -22px;
+}
+ 
+.bx-controls-direction button:disabled{
+  opacity: 0;
+}
+.bx-controls-direction button{
+  border: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: calc(50% - 20px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%!important;
+  background: var(--red-color)!important;
+  box-shadow: 0 0 42px 0 #00000029;
+  display: block;
+}
 table{
   border-radius: 8px ;
 }

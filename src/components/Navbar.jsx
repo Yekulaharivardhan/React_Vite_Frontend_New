@@ -42,7 +42,7 @@ const [modalShow, setModalShow] = React.useState(false);
                 </a>
                 <ul className="dropdown-menu">
                   <li><a className="dropdown-item" onClick={handleAction}>Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className="dropdown-item" href="" onClick={(e) =>(e.preventDefault(), navigate("/information"))}>Another action</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>

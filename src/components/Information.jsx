@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 const Information = () => {
 const navref = useRef(null)
 
-useEffect(() => {
+useEffect(() => { 
     const setScrollPadding = () => {
       if (navref.current) {
         const navigationHeight = navref.current.offsetHeight + 8 + 'px';

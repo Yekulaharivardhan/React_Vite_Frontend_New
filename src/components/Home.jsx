@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUsername, selectUsername, setPhoneNumber, selectPhoneNumber, selectAddress, setAddress } from '../features/slices';
+import { setUsername, setPhoneNumber, fetchData } from '../features/slices';
 import Navbar from './Navbar';
-import Sidebar from './Sidebar';
 import Carousel from './Carousel';
 import axios from 'axios';
 import { Card, Container } from 'react-bootstrap';
 import Loader from '../ReusableComponents/Loader';
-import { Button } from 'react-bootstrap';
+import ScrollAnimation from '../ReusableComponents/ScrollAnimation';
+import VerticalCards from './VerticalCards';
+import StickyCard from './StickyCard';
 
 
 const Home = () => {
-
+  const {cardData, loading} = useSelector((state) => state.todos);
+  const username = useSelector(state => state.user.username);
+  const phoneNumber = useSelector(state => state.phone.phoneNumber);
+  const address = useSelector( state => state.address.address);
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     name: "",
     age: null
   })
-  const [data, setData] = useState()
   const [datafromBackend, setDatafromBackend] = useState()
-  const [loading, setLoading] = useState(false)
 
   const handleuserData = (e) => {
     const { name, value } = e.target;
@@ -28,7 +31,6 @@ const Home = () => {
     }))
   }
 
-  console.log(userData)
   const postData = async () => {
     let name = userData.name;
     let age = userData.age
@@ -37,11 +39,7 @@ const Home = () => {
       alert('User added successfully!');
       getUsersgetUsers()
     }
-    console.log(res, '33')
-
-
-
-
+ 
   }
 
 
@@ -53,33 +51,20 @@ const Home = () => {
   const getUsersgetUsers = async () => {
     const res = await axios.get("http://localhost:5001/getUsers")
 
-    console.log(res.data, '54 responswe')
+    
   }
-
-console.log(data)
-
-  const getData = async () => {
-    setLoading(true)
-     await axios.get("https://jsonplaceholder.typicode.com/todos/")
-      .then(res => {
-        setLoading(false)
-        const first50Records = res.data.slice(0, 10);
-        setData(first50Records)
-      })
-  }
-  const username = useSelector(selectUsername);
-  const phoneNumber = useSelector(selectPhoneNumber);
-  const address = useSelector(selectAddress);
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+ 
 
   useEffect(() => {
-    getData()
     getDatafromBackend()
   }, [])
 
   const [startIndex, setStartIndex] = useState(0);
   const displayCards = () => {
-    return data?.slice(startIndex, startIndex + 5).map((item, index) => {
+    return cardData?.slice(startIndex, startIndex + 5).map((item, index) => {
       return(
       <Card bg="light" key={index} text={'dark'} style={{ width: '16rem', height:"9rem", overflow:"hidden" }} className='item '>
         <Card.Header>Header</Card.Header>
@@ -94,7 +79,7 @@ console.log(data)
   };
 
   const handleNext = () => {
-    if (startIndex + 4 < data.length) {
+    if (startIndex + 4 < cardData.length) {
       setStartIndex(startIndex + 1);
     }
   };
@@ -105,71 +90,24 @@ console.log(data)
     }
   };
   return (
-    <div >
+    <div className='container'>
       <Navbar />
 
-      <Sidebar />
-
       <Carousel />
+      <StickyCard />
 
-      <div className="container">
-        <label htmlFor="name">Name</label>
-        <input id='name' name="name" type="text" onChange={handleuserData} />
-        <label htmlFor="age">Age</label>
-        <input id='age' name="age" type="text" onChange={handleuserData} />
-        <button onClick={postData}>Submit</button>
+      <div className=" gap-4 d-flex my-5 position-relative input_container_home">
+        <label className='input_label_p1' htmlFor="name">Name</label>
+        <input className='' id='name' name="name" type="text" onChange={handleuserData} />
+        <label className='' htmlFor="age">Age</label>
+        <input className='' id='age' name="age" type="text" onChange={handleuserData} />
+        <button className='btn btn-outline-primary' onClick={postData}>Submit</button>
       </div>
-      <div className='container p-3 text-success'>{datafromBackend}</div>
+      <div className=' p-3 text-success'>{datafromBackend}</div>
+ 
+      <ScrollAnimation />
 
-      {data && <Container >
-        <table className="table table-light table-striped rounded">
-          <thead>
-            <tr>
-              <th>
-                Title
-              </th>
-              <th>
-                ID
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.map(i => {
-              if (i.title.length >= 65)
-                return (
-                  <tr>
-
-                    <td>{i.title}</td>
-                    <td>{i.id}</td>
-                  </tr>
-
-                )
-            })}
-          </tbody>
-        </table>
-      </Container>}
-
-      <Container className='bx-wrapper shadow rounded py-3'>
-        <div className='bx-viewport'>
-          <div className='bxslider'>
-            {displayCards()}
-          </div>
-          <div class="bx-controls">
-            <div class="bx-controls-direction">
-              <Button className='bx-prev' onClick={handlePrev} disabled={startIndex === 0}>
-
-
-              <i class="fa-solid fa-less-than"></i>
-              </Button>
-               
-              <Button className='bx-next' onClick={handleNext} disabled={startIndex + 4 >= data?.length}>
-              <i class="fa-solid fa-greater-than"></i>
-              </Button>
-               
-            </div>
-          </div>
-        </div>
-      </Container>
+    <VerticalCards data={cardData} displayCards={displayCards} handlePrev={handlePrev} handleNext={handleNext} startIndex={startIndex}/>
 
 
       {loading && <Loader />}

@@ -1,9 +1,11 @@
 body {
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
     font-size: 14px;
     line-height: 1.43;
     color: rgb(34, 34, 34);
     background-color: rgb(255, 255, 255);
     -webkit-font-smoothing: antialiased;
     margin: 0px;
+    background-color: rgba(217, 218, 217, 0.349);
+    font-family: 'Inter', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
 }

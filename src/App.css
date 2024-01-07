@@ -138,7 +138,7 @@ color: white;
 .animated-element.visible {
   opacity: 1;
   transform: translateY(0);
-}
+} 
 
 .side_bar_button:active{
   background-color: rgb(15, 15, 15);

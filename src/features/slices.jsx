@@ -1,4 +1,5 @@
-import { createSlice, combineReducers } from '@reduxjs/toolkit';
+import { createSlice, combineReducers, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const userSlice = createSlice({
   name: 'user',
@@ -13,7 +14,6 @@ const userSlice = createSlice({
 });
 
 export const { setUsername } = userSlice.actions;
-export const selectUsername = state => state.user.username;
 export const userReducer = userSlice.reducer;
 
 // Phone Slice
@@ -30,7 +30,6 @@ const phoneSlice = createSlice({
 });
 
 export const { setPhoneNumber } = phoneSlice.actions;
-export const selectPhoneNumber = state => state.phone.phoneNumber;
 export const phoneReducer = phoneSlice.reducer;
 
 // Address Slice
@@ -47,14 +46,54 @@ const addressSlice = createSlice({
 });
 
 export const { setAddress } = addressSlice.actions;
-export const selectAddress = state => state.address.address;
 export const addressReducer = addressSlice.reducer;
+
+
+//---------------------------API-----------
+export const fetchData = createAsyncThunk('todos/fetchData', async () => {
+  const response = await axios.get('https://jsonplaceholder.typicode.com/todos/');
+  return response.data.slice(0, 10); // Assuming you want to take the first 10 records
+});
+
+const initialState = {
+  cardData: [],
+  loading: false,
+};
+const todosSlice = createSlice({
+  name: 'todos',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.cardData = action.payload;
+        console.log(state.data,'state.data')
+      })
+      .addCase(fetchData.rejected, (state) => {
+        state.loading = false;
+        // Handle error if needed
+      });
+  },
+});
+
+export const todoreducer = todosSlice.reducer 
+
+//---------------------------API-end----------
+
 
 // Combine Reducers
 const rootReducer = combineReducers({
   user: userReducer,
   phone: phoneReducer,
   address: addressReducer,
+  todos: todoreducer,
 });
 
 export default rootReducer;
+
+
+

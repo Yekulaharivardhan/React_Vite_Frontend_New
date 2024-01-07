@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import ModalComponent from '../ReusableComponents/ModalComponent';
-import Modal from 'react-bootstrap/Modal';
+ 
 const Navbar = () => {
 
 const navigate = useNavigate()
@@ -22,17 +22,16 @@ const [modalShow, setModalShow] = React.useState(false);
   }
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark fixed-top">
+      <nav className="z-2 navbar navbar-expand-lg bg-body-tertiary bg-dark fixed-top">
         <div className="container-fluid px-5">
-          <a className="navbar-brand" href="#">Navbar</a>
+        <div>
+      <NavLink className="navbar-brand text-primary" href="" onClick={(e)=>(e.preventDefault(), navigate("/"))}><i class="fa-solid fa-house"></i></NavLink>
+  </div>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
               <li className="nav-item">
                 <a className="nav-link" href="" onClick={(e) => handleLogin(e)}>Login</a>
               </li>
@@ -42,18 +41,18 @@ const [modalShow, setModalShow] = React.useState(false);
                 </a>
                 <ul className="dropdown-menu">
                   <li><a className="dropdown-item" onClick={handleAction}>Action</a></li>
-                  <li><a className="dropdown-item" href="" onClick={(e) =>(e.preventDefault(), navigate("/information"))}>Another action</a></li>
+                  <li><a className="dropdown-item" href="" onClick={(e) =>(e.preventDefault(), navigate("/information"))}>Explore</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-primary" href="" onClick={handleRegisterModal}>Register</a>
+                <a className="nav-link fw-bold" href="" onClick={handleRegisterModal}>Register</a>
               </li>
             </ul>
             <form className="d-flex" role="search">
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">Search</button>
+              <button className="btn btn-outline-success opacity-75" type="submit">Search</button>
             </form>
           </div>
         </div>

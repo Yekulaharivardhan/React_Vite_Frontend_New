@@ -4,9 +4,11 @@
 --dark-blue-color:#365486;
  }
 ::-webkit-scrollbar {
-  width: 10px; /* Set the width of the scrollbar */
+  width: 10px; 
 }
-
+.offcanvas.offcanvas-start{
+  width: 300px !important;
+}
 ::-webkit-scrollbar-thumb {
   background-color: var(--blue-color);  
   border-radius: 6px; 
@@ -33,15 +35,17 @@
  }
 html{
   scroll-behavior: smooth;
-  scroll-padding-top: var(--scroll-padding, 40px);
+  scroll-padding-top: var(--scroll-padding, 40px) !important;
 }
+ 
+ 
 .info_main .child{
 padding: 15px;
 max-width: 70rem;
 display: inline-block;
 text-decoration: none;
 color: black;
-margin-top: 3.5rem;
+margin-top: 1.5rem;
 border-radius: 8px;
 box-shadow: lightgray 10px 10px 30px 0px;
 }
@@ -67,7 +71,8 @@ color: white;
 .bx-viewport{
   width: 100%;
   overflow: hidden;
-  border-radius: 10px
+  border-radius: 10px;
+  padding: 0px 15px 0px 15px;
 }
 .bxslider{
   width: 10000%;
@@ -98,6 +103,10 @@ color: white;
 }
 .bx-controls-direction .bx-prev{
 left: -22px;
+}
+.bx-prev img, .bx-next img{
+  padding: 10px;
+  filter: brightness(0) invert(1);;
 }
 .bx-controls-direction .bx-next{
 right: -22px;
@@ -169,6 +178,7 @@ color: white;
 }
 .carousel_main{
   z-index: -1 !important;
+  margin-top: 75px;
 }
  
 .icon_style{

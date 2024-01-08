@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import ModalComponent from '../ReusableComponents/ModalComponent';
+import ModalPopup from '../ReusableComponents/ModalPopup';
  
 const Navbar = () => {
 
@@ -19,7 +20,15 @@ const [modalShow, setModalShow] = React.useState(false);
   const handleRegisterModal=(e)=>{
     e.preventDefault()
     setModalShow(true)
+    
   }
+
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+
+   
+
   return (
     <div>
       <nav className="z-2 navbar navbar-expand-lg bg-body-tertiary bg-dark fixed-top">
@@ -43,7 +52,7 @@ const [modalShow, setModalShow] = React.useState(false);
                   <li><a className="dropdown-item" onClick={handleAction}>Action</a></li>
                   <li><a className="dropdown-item" href="" onClick={(e) =>(e.preventDefault(), navigate("/information"))}>Explore</a></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                  <li><a className="dropdown-item" onClick={handleShow}>Content Disc</a></li>
                 </ul>
               </li>
               <li className="nav-item">
@@ -57,6 +66,7 @@ const [modalShow, setModalShow] = React.useState(false);
           </div>
         </div>
       </nav>
+      <ModalPopup  show={show} onHide={() => setShow(false)}/>
       <ModalComponent show={modalShow}
         onHide={() => setModalShow(false)}
           title="Register"

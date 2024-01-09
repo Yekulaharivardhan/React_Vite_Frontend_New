@@ -33,10 +33,10 @@ const petimage = [
   }, []); // Empty dependency array to run the effect only once on mount
 
   return (
-    <div className={`animated-element ${isVisible ? 'visible' : ''}`}>
+    <div className={`animated-element container ${isVisible ? 'visible' : ''}`}>
        
      <div>
-        <Row className='justify-content-evenly bg-light p-4 rounded shadow w-100'>
+        <Row className='justify-content-evenly bg-light p-4 rounded shadow '>
      <h2 className='fw-bold pb-3'>Get a dog for you</h2>
        {petimage.map(i=>(
 

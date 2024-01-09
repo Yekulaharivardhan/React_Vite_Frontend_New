@@ -1,34 +1,28 @@
 import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const Information = () => {
     const navref = useRef(null)
- 
     useEffect(() => {
         const setScrollPadding = () => {
             if (navref.current) {
-                const navigationHeight = navref.current.offsetHeight + 8 + 'px';
+                const navigationHeight = navref.current.offsetHeight - 108 + 'px';
                 document.documentElement.style.setProperty('--scroll-padding', navigationHeight);
             }
         };
-
-        // Call setScrollPadding once after the initial render
+        
         setScrollPadding();
-
-        // Attach an event listener for window resize, in case the height changes dynamically
         window.addEventListener('resize', setScrollPadding);
-
-        // Clean up the event listener on component unmount
         return () => {
             window.removeEventListener('resize', setScrollPadding);
         };
     }, []);
-
-
-
+    
+    console.log(navref)
+    
+    
     return (
         <div>
-            <div ref={navref} className=" position-fixed   rounded shadow text-white fw-bold sticky_card_Nav" style={{right:"1%", padding: "10px", top: "18%", cursor: "pointer", backgroundColor: "#7077A1", }}>
+            <div ref={navref} className=" position-fixed   rounded shadow text-white fw-bold sticky_card_Nav" style={{right:"0.5%", padding: "10px", top: "var(--scroll-padding, 50px)", cursor: "pointer", backgroundColor: "#7077A1", }}>
 
                 <div className='nav_link_senction gap-3 text-decoration-none'>
                     <p><a className=" " href="#one">About </a></p>

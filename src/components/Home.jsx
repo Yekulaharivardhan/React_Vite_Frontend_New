@@ -8,7 +8,7 @@ import { Card, Container } from 'react-bootstrap';
 import Loader from '../ReusableComponents/Loader';
 import ScrollAnimation from '../ReusableComponents/ScrollAnimation';
 import VerticalCards from './VerticalCards';
-import StickyCard from './StickyCard';
+import TableComponent from '../ReusableComponents/TableComponent';
 
 
 const Home = () => {
@@ -30,7 +30,6 @@ const Home = () => {
       [name]: value
     }))
   }
-
   const postData = async () => {
     let name = userData.name;
     let age = userData.age
@@ -94,7 +93,6 @@ const Home = () => {
       <Navbar />
 
       <Carousel />
-      <StickyCard />
 
       <div className=" gap-4 d-flex my-5 position-relative input_container_home">
         <label className='input_label_p1' htmlFor="name">Name</label>
@@ -106,6 +104,10 @@ const Home = () => {
       <div className=' p-3 text-success'>{datafromBackend}</div>
  
       <ScrollAnimation />
+
+      <TableComponent data={cardData}/>
+
+
 
     <VerticalCards data={cardData} displayCards={displayCards} handlePrev={handlePrev} handleNext={handleNext} startIndex={startIndex}/>
 

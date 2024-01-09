@@ -12,11 +12,11 @@ const VerticalCards = ({displayCards, handlePrev, startIndex, handleNext, data})
             <div className="bx-controls-direction">
               <Button className='bx-prev' onClick={handlePrev} disabled={startIndex === 0}>
 
-              <i className="fa-solid fa-less-than"></i>
+              <img src="./images/left_arrow.svg" alt="" />
               </Button>
                
               <Button className='bx-next' onClick={handleNext} disabled={startIndex + 4 >= data?.length}>
-              <i className="fa-solid fa-greater-than"></i>
+              <img src="./images/right_arrow.svg" alt="" />
               </Button>
                
             </div>

@@ -1,13 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {useForm} from "react-hook-form"
 
 const LoginPage = () => {
-
+const navigate = useNavigate()
 const {register, handleSubmit,formState: { errors },} = useForm();
 
 const onSubmit=(data)=>{
-alert(JSON.stringify(data))
+console.log(JSON.stringify(data))
+navigate("/")
 }
   
   return (
